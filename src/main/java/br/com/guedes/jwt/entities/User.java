@@ -9,28 +9,28 @@ public class User {
 
     @Id
     private String id;
-    private String nome;
+    private String name;
 
     @JsonIgnore
-    private String senha;
+    private String password;
 
     public User() {}
 
-    public User(String id, String nome, String senha) {
+    public User(String id, String name, String password) {
         this.id = id;
-        this.nome = nome;
-        this.senha = senha;
+        this.name = name;
+        this.password = password;
     }
 
     public String getId() {
         return id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getPassword() {
+        return password;
     }
 }
