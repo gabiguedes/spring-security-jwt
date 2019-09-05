@@ -1,6 +1,7 @@
 package br.com.guedes.jwt;
 
 import br.com.guedes.jwt.entities.User;
+import br.com.guedes.jwt.entities.enums.Profile;
 import br.com.guedes.jwt.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -25,7 +26,9 @@ public class JwtApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		User gaby = new User(null, "Gabriela", bCryptPasswordEncoder.encode("teste"));
+		User gaby = new User(null, "admin", bCryptPasswordEncoder.encode("123"));
+		gaby.addProfile(Profile.ADMIN);
+
 		userRepository.saveAll(Arrays.asList(gaby));
 	}
 
