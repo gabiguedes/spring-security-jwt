@@ -26,8 +26,9 @@ public class JwtApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		User gaby = new User(null, "admin", bCryptPasswordEncoder.encode("123"));
-		gaby.addProfile(Profile.ADMIN);
+		User gaby = new User(null, "admin", "gabriela_rayssa@hotmail.com",
+				bCryptPasswordEncoder.encode("123"));
+				gaby.addProfile(Profile.ADMIN);
 
 		userRepository.saveAll(Arrays.asList(gaby));
 	}

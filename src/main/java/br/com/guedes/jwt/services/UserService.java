@@ -23,7 +23,7 @@ public class UserService {
     }
 
     public User fromDTO(UserNewDTO objDto) {
-        User user = new User(null, objDto.getName(), bCryptPasswordEncoder.encode(objDto.getPassword()));
+        User user = new User(null, objDto.getName(), objDto.getEmail(), bCryptPasswordEncoder.encode(objDto.getPassword()));
         return user;
     }
 
