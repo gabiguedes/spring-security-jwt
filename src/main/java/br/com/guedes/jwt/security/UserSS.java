@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 public class UserSS implements UserDetails {
+    private static final long serialVersionUID = 1l;
 
     private String id;
     private String email;
