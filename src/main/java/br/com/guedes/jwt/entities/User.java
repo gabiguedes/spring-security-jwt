@@ -15,6 +15,7 @@ public class User {
     @Id
     private String id;
     private String name;
+    private String email;
 
     @JsonIgnore
     private String password;
@@ -25,9 +26,10 @@ public class User {
         addProfile(Profile.USER);
     }
 
-    public User(String id, String name, String password) {
+    public User(String id, String name, String password, String email) {
         this.id = id;
         this.name = name;
+        this.email = email;
         this.password = password;
         addProfile(Profile.USER);
     }
@@ -38,6 +40,10 @@ public class User {
 
     public String getName() {
         return name;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getPassword() {

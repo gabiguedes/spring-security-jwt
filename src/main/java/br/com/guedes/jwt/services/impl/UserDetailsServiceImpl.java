@@ -20,6 +20,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if(user == null) {
             throw new UsernameNotFoundException(email);
         }
-        return new UserSS();
+        return new UserSS(user.getId(), user.getEmail(), user.getPassword(), user.getProfile());
     }
 }
