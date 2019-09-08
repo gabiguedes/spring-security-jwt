@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -16,8 +18,12 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
     public User fromDTO(UserNewDTO objDto) {
-        User user = new User(null, objDto.getName(), bCryptPasswordEncoder.encode(objDto.getPassword()));
+        User user = new User(null, objDto.getName(), objDto.getEmail(), bCryptPasswordEncoder.encode(objDto.getPassword()));
         return user;
     }
 

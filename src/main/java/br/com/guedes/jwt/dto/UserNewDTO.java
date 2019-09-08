@@ -13,6 +13,8 @@ public class UserNewDTO {
     @NotEmpty(message="Preenchimento obrigatório")
     private String password;
 
+    private String email;
+
     public UserNewDTO() {}
 
     public String getName() {
@@ -21,5 +23,9 @@ public class UserNewDTO {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }
