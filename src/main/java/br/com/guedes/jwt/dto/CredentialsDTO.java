@@ -1,11 +1,14 @@
 package br.com.guedes.jwt.dto;
 
-public class CredenciaisDTO {
+import java.io.Serializable;
+
+public class CredentialsDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private String email;
     private String password;
 
-    public CredenciaisDTO() {}
+    public CredentialsDTO() {}
 
     public String getEmail() {
         return email;

@@ -1,5 +1,6 @@
 package br.com.guedes.jwt;
 
+import br.com.guedes.jwt.dto.UserNewDTO;
 import br.com.guedes.jwt.entities.User;
 import br.com.guedes.jwt.entities.enums.Profile;
 import br.com.guedes.jwt.repositories.UserRepository;
@@ -26,11 +27,12 @@ public class JwtApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		User gaby = new User(null, "admin", "gabriela_rayssa@hotmail.com",
-				bCryptPasswordEncoder.encode("123"));
-				gaby.addProfile(Profile.ADMIN);
+		User gaby = new User(null, "gaby", bCryptPasswordEncoder.encode("123"), "zooiv3rde@gmail.com");
+		User gabriela = new User(null, "admin", bCryptPasswordEncoder.encode("123"), "gabriela_rayssa@hotmail.com");
+		gaby.addProfile(Profile.ADMIN);
+		gabriela.addProfile(Profile.ADMIN);
 
-		userRepository.saveAll(Arrays.asList(gaby));
+		userRepository.saveAll(Arrays.asList(gaby, gabriela));
 	}
 
 }

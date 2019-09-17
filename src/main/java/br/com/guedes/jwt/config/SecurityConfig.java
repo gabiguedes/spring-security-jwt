@@ -1,8 +1,13 @@
 package br.com.guedes.jwt.config;
 
+
+import br.com.guedes.jwt.security.JWTAuthenticationFilter;
+import br.com.guedes.jwt.security.JWTUtil;
+import br.com.guedes.jwt.services.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,12 +20,16 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    private JWTUtil jwtUtil;
 
     private static final String[] PUBLIC_MATCHERS = {
             "/users/**",
@@ -40,6 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
            .antMatchers(PUBLIC_MATCHERS)
            .permitAll()
            .anyRequest().authenticated();
+
+       http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
    }
 
