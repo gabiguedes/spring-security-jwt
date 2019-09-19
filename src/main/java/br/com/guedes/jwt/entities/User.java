@@ -16,14 +16,11 @@ public class User {
     private String id;
     private String name;
     private String email;
-
-    @JsonIgnore
     private String password;
-
     private Set<Integer> profiles = new HashSet<>();
 
     public User() {
-        addProfile(Profile.USER);
+        addProfile(Profile.ADMIN);
     }
 
     public User(String id, String name, String password, String email) {
@@ -31,7 +28,7 @@ public class User {
         this.name = name;
         this.email = email;
         this.password = password;
-        addProfile(Profile.USER);
+        addProfile(Profile.ADMIN);
     }
 
     public String getId() {
@@ -56,5 +53,9 @@ public class User {
 
     public void addProfile(Profile profile) {
         profiles.add(profile.getCod());
+    }
+
+    public Set<Integer> getProfiles() {
+        return profiles;
     }
 }

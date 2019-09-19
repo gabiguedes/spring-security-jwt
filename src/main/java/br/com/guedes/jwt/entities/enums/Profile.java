@@ -22,8 +22,8 @@ public enum Profile {
         return description;
     }
 
-    public void setDescription(String descricao) {
-        this.description = descricao;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public static Profile toEnum(Integer cod) {
