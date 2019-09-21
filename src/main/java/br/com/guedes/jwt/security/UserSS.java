@@ -16,8 +16,7 @@ public class UserSS implements UserDetails {
     private String id;
     private String email;
     private String password;
-  //  private Collection<? extends GrantedAuthority> authorities;
-    private Set<GrantedAuthority> authorities = new HashSet<>();
+    private Collection<? extends GrantedAuthority> authorities;
 
     public UserSS() {}
 
@@ -26,10 +25,8 @@ public class UserSS implements UserDetails {
         this.id = id;
         this.email = email;
         this.password = password;
-        for (GrantedAuthority role : getAuthorities()) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-            // this.authorities = profiles.stream().map(x -> new SimpleGrantedAuthority(x.getDescription())).collect(Collectors.toList());
-        }
+        this.authorities = profiles.stream().map(x -> new SimpleGrantedAuthority(x.getDescription())).collect(Collectors.toList());
+
     }
     public String getId() {
         return id;
