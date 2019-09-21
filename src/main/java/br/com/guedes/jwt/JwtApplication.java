@@ -19,7 +19,7 @@ public class JwtApplication implements CommandLineRunner {
 	private UserRepository userRepository;
 
 	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	private BCryptPasswordEncoder bc;
 
 	public static void main(String[] args) {
 		SpringApplication.run(JwtApplication.class, args);
@@ -27,13 +27,11 @@ public class JwtApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		User gaby = new User(null, "gaby", bCryptPasswordEncoder.encode("123"), "zooiv3rde@gmail.com");
-		User gabriela = new User(null, "admin", bCryptPasswordEncoder.encode("123"), "tetsf");
-		User gabriela1 = new User(null, "ROLE_ADMIN", "123", "gabriela_rayssa@hotmail.com");
-        gaby.addProfile(Profile.ADMIN);
+		User gabriela = new User(null, "Gabriela", "zooiv3rde@gmail.com", bc.encode("123"));
+		gabriela.addProfile(Profile.ADMIN);
 
 		userRepository.deleteAll();
-		userRepository.saveAll(Arrays.asList(gaby, gabriela, gabriela1));
+		userRepository.saveAll(Arrays.asList(gabriela));
 	}
 
 }

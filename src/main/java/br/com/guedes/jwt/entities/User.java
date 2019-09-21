@@ -1,7 +1,6 @@
 package br.com.guedes.jwt.entities;
 
 import br.com.guedes.jwt.entities.enums.Profile;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -20,34 +19,42 @@ public class User {
     private Set<Integer> profiles = new HashSet<>();
 
     public User() {
-        addProfile(Profile.ADMIN);
+        addProfile(Profile.USER);
     }
 
-    public User(String id, String name, String password, String email) {
+    public User(String id, String name, String email, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        addProfile(Profile.ADMIN);
+        addProfile(Profile.USER);
     }
 
     public String getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getEmail() {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPassword() {
         return password;
     }
 
-    public Set<Profile> getProfile() {
+    public void setPassword(String senha) {
+        this.password = senha;
+    }
+
+    public Set<Profile> getProfiles() {
         return profiles.stream().map(x -> Profile.toEnum(x)).collect(Collectors.toSet());
     }
 
@@ -55,7 +62,7 @@ public class User {
         profiles.add(profile.getCod());
     }
 
-    public Set<Integer> getProfiles() {
-        return profiles;
+    public void setProfiles(Set<Integer> perfis) {
+        this.profiles = perfis;
     }
 }

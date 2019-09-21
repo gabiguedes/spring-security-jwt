@@ -1,4 +1,4 @@
-package br.com.guedes.jwt.security;
+package br.com.guedes.jwt.util;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
