@@ -20,36 +20,33 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
     private UserDetailsService detailsService;
 
-    public JWTAuthorizationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil,
-                                  UserDetailsService detailsService) {
+    public JWTAuthorizationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil, UserDetailsService detailsService) {
         super(authenticationManager);
         this.jwtUtil = jwtUtil;
         this.detailsService = detailsService;
     }
 
-//    @Override
-//    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-//            throws IOException, ServletException {
-//
-//        String header = request.getHeader("Authorization");
-//        if (header != null && header.startsWith("Bearer ")) {
-//            UsernamePasswordAuthenticationToken auth = getAuthentication(header.substring(7));
-//            if (auth != null) {
-//                SecurityContextHolder.getContext().setAuthentication(auth);
-//            }
-//        }
-//
-//        chain.doFilter(request, response);
-//    }
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
 
-//    private UsernamePasswordAuthenticationToken getAuthentication(String token) {
-//
-//        if (jwtUtil.tokenValido(token)) {
-//            String username = jwtUtil.getUsername(token);
-//            UserDetails user = detailsService.loadUserByUsername(username);
-//            return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-//        }
-//
-//        return null;
-//    }
+        String header = request.getHeader("Authorization");
+        if (header != null && header.startsWith("Bearer ")) {
+            UsernamePasswordAuthenticationToken auth = getAuthentication(header.substring(7));
+            if (auth != null) {
+                SecurityContextHolder.getContext().setAuthentication(auth);
+            }
+        }
+        chain.doFilter(request, response);
+    }
+
+    private UsernamePasswordAuthenticationToken getAuthentication(String token) {
+
+        if (jwtUtil.tokenValido(token)) {
+            String username = jwtUtil.getUsername(token);
+            UserDetails user = detailsService.loadUserByUsername(username);
+            return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+        }
+        return null;
+    }
 }
