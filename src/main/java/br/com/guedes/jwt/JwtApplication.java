@@ -28,10 +28,11 @@ public class JwtApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		User gabriela = new User(null, "Gabriela", "zooiv3rde@gmail.com", bc.encode("123"));
+		User guedes = new User(null, "Guedes", "gabriela_rayssa@hotmail.com", bc.encode("321"));
 		gabriela.addProfile(Profile.ADMIN);
 
 		userRepository.deleteAll();
-		userRepository.saveAll(Arrays.asList(gabriela));
+		userRepository.saveAll(Arrays.asList(gabriela, guedes));
 	}
 
 }
