@@ -4,6 +4,7 @@ import br.com.guedes.jwt.entities.User;
 import br.com.guedes.jwt.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ public class UserResource {
     @Autowired
     private UserService userService;
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<User>> findAll() {
         List<User> listUsers = userService.findAll();
