@@ -30,7 +30,10 @@ public class UserService {
     }
 
     public static UserSS autheticated() {
-        return (UserSS) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        try {
+            return (UserSS) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch (Exception e) {
+            return null;
+        }
     }
-
 }
