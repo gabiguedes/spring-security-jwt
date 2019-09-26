@@ -3,7 +3,9 @@ package br.com.guedes.jwt.services;
 import br.com.guedes.jwt.dto.UserNewDTO;
 import br.com.guedes.jwt.entities.User;
 import br.com.guedes.jwt.repositories.UserRepository;
+import br.com.guedes.jwt.security.UserSS;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,10 @@ public class UserService {
     public User fromDTO(UserNewDTO objDto) {
         User user = new User(null, objDto.getName(), objDto.getEmail(), bCryptPasswordEncoder.encode(objDto.getPassword()));
         return user;
+    }
+
+    public static UserSS autheticated() {
+        return (UserSS) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
 }
